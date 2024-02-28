@@ -1,0 +1,9 @@
+package com.spring.microservice.hotel.repo;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.spring.microservice.hotel.entity.Hotel;
+
+public interface HotelRepo extends CrudRepository<Hotel, Integer>{
+
+}

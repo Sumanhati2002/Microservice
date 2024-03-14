@@ -1,0 +1,28 @@
+server:
+  port: 8282
+  
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/HotelService-MS
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+  
+#config for adding in eureka server
+  application:
+    name: HOTEL-SERVICE
+eureka:
+  instance:
+    ip-address: true
+    hostname: localhost
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      default-zone: http://localhost:8761/eureka/      

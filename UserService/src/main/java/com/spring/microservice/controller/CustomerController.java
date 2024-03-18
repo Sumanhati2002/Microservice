@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.microservice.entity.Customer;
+import com.spring.microservice.responce.CustomerResponce;
 import com.spring.microservice.service.CustomerService;
 
 import lombok.AllArgsConstructor;
@@ -35,9 +36,9 @@ public class CustomerController {
 
     // http://localhost:8181/customer/1
     @GetMapping("{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable("id") Integer customerId){
-    	Customer customer = customerService.getCustomerById(customerId);
-        return new ResponseEntity<>(customer, HttpStatus.OK);
+    public ResponseEntity<CustomerResponce> getCustomerById(@PathVariable("id") Integer customerId){
+    	CustomerResponce customer = customerService.getCustomerById(customerId);
+        return  ResponseEntity.status(HttpStatus.OK).body(customer);
     }
 
     // Build Get All Users REST API

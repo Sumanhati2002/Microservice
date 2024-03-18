@@ -3,12 +3,13 @@ package com.spring.microservice.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.microservice.entity.Customer;
-import com.spring.microservice.entity.RatingService;
 import com.spring.microservice.repo.CustomerRepo;
+import com.spring.microservice.responce.CustomerResponce;
 import com.spring.microservice.service.CustomerService;
 import com.spring.microservice.service.external.RatingServiceEx;
 
@@ -17,8 +18,11 @@ public class CustomerImpl implements CustomerService{
 
 	@Autowired
 	private CustomerRepo customerRepo;
-//	@Autowired
-//	private RatingServiceEx ratingServiceEx;
+	@Autowired
+	private RatingServiceEx ratingServiceEx;
+	 
+	@Autowired
+	private ModelMapper mapper;
 	
 	@Override
 	public Customer createCustomer(Customer customer) {
@@ -27,15 +31,11 @@ public class CustomerImpl implements CustomerService{
 	}
 
 	@Override
-	public Customer getCustomerById(Integer customerId) {
+	public CustomerResponce getCustomerById(Integer customerId) {
 		// TODO Auto-generated method stub
 		Optional<Customer> customerid=customerRepo.findById(customerId);
-		//fetch rating from rating service
-//		List<RatingService> userRatings=(List<RatingService>) ratingServiceEx.getRatingByUserId(customerId).getBody();
-//		Customer c= new Customer();
-//		c.setRatings(userRatings);
-//		customerRepo.save(c);
-		return customerid.get();
+		CustomerResponce customerResponce= mapper.map(customerid, CustomerResponce.class);
+		return customerResponce;
 	}
 
 	@Override

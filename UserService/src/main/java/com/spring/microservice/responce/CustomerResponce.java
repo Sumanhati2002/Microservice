@@ -1,6 +1,5 @@
 package com.spring.microservice.responce;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
@@ -13,5 +12,6 @@ public class CustomerResponce {
 	private String email;
 	private String about;
 	
-	private List<RatingResponce> ratings=new ArrayList<RatingResponce>();
+	//private List<RatingResponce> ratings=new ArrayList<RatingResponce>();
+	private List<RatingResponce> ratingResponce;
 }

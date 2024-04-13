@@ -7,13 +7,16 @@ spring:
     username: postgres
     password: root
     driver-class-name: org.postgresql.Driver
+
   jpa:
     properties:
       hibernate:
           dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
-   
+  main:
+    allow-bean-definition-overriding: true 
+     
    #to resiter in eureca server
   application:
     name: USER_SERVICE
@@ -26,7 +29,6 @@ eureka:
     fetch-registry: true
     service-url:
       default-zone: http://localhost:8761/eureka/
-      
-      
+       
       
         

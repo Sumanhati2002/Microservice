@@ -46,4 +46,5 @@ public class RatingController {
         List<RatingEntity> ratingsByHotel = ratingService.getRatingsByHotelId(hotelId);
         return new ResponseEntity<>(ratingsByHotel, HttpStatus.OK);
     }
+	
 }

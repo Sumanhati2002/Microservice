@@ -1,17 +1,20 @@
 package com.spring.microservice.service.impl;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.spring.microservice.entity.Customer;
+import com.spring.microservice.entity.Hotel;
+import com.spring.microservice.entity.Rating;
+import com.spring.microservice.exception.ResourceNotFoundException;
 import com.spring.microservice.repo.CustomerRepo;
-import com.spring.microservice.responce.CustomerResponce;
-import com.spring.microservice.responce.RatingResponce;
 import com.spring.microservice.service.CustomerService;
+import com.spring.microservice.service.external.HotelServiceEx;
 import com.spring.microservice.service.external.RatingServiceEx;
 
 @Service
@@ -22,10 +25,11 @@ public class CustomerImpl implements CustomerService {
 
 	@Autowired
 	private RatingServiceEx ratingServiceEx;
+	 
 
 	@Autowired
-	private ModelMapper mapper;
-
+	private HotelServiceEx hotelServiceEx;
+	
 	@Override
 	public Customer createCustomer(Customer customer) {
 		// TODO Auto-generated method stub
@@ -33,15 +37,18 @@ public class CustomerImpl implements CustomerService {
 	}
 
 	@Override
-	public CustomerResponce getCustomerById(Integer customerId) {
-		// TODO Auto-generated method stub
-		Optional<Customer> customerid = customerRepo.findById(customerId);
-		CustomerResponce customerResponce = mapper.map(customerid, CustomerResponce.class);
-		// using feign client
-
-		List<RatingResponce> ratingResponse = ratingServiceEx.getRatingByUserId(customerId);
-		customerResponce.setRatingResponce((RatingResponce) ratingResponse);
-		return customerResponce;
+	public Customer getCustomerById(Integer customerId) {
+		Customer customer2 = customerRepo.findById(customerId).orElseThrow(()->new ResourceNotFoundException("error!!!"));
+		Rating[] ratinguser = ratingServiceEx.getRatingByUserId(customer2.getId());
+		List<Rating> ratings2 = Arrays.stream(ratinguser).toList();
+		List<Rating> ratingList =ratings2.stream().map(rating->{
+			Hotel hotel= hotelServiceEx.getHotelByUserId(rating.getHotelId());
+			rating.setHotel(hotel);
+			return rating;
+		}).collect(Collectors.toList());
+		customer2.setRatings(ratingList);
+		return customer2;
+	
 	}
 
 	@Override

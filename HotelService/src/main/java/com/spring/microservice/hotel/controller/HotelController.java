@@ -41,4 +41,5 @@ public class HotelController {
 	        List<Hotel> hotels = hotelService.getAllHotels();
 	        return new ResponseEntity<>(hotels, HttpStatus.OK);
 	    }
+	    
 }

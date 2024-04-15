@@ -1,0 +1,17 @@
+package com.spring.microservice.service.external;
+
+import java.util.List;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.spring.microservice.hotel.entity.Hotel;
+
+
+@FeignClient(name = "HOTEL-SERVICE")
+public interface HotelServiceEx {
+
+	@GetMapping("/hotel/{id}")
+    public List<Hotel> getHotelByUserId(@PathVariable int id);
+}

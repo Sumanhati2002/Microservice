@@ -1,0 +1,15 @@
+/*
+ * package com.spring.microservice.rating.service.external;
+ * 
+ * import java.util.List;
+ * 
+ * import org.springframework.cloud.openfeign.FeignClient; import
+ * org.springframework.web.bind.annotation.GetMapping;
+ * 
+ * import com.spring.microservice.rating.responce.HotelResponce;
+ * 
+ * @FeignClient("HOTEL-SERVICE") public interface HotelEx {
+ * 
+ * @GetMapping("hotel/rating/{ratingId}") List<HotelResponce>
+ * getHotelByRatingId(int ratingId); }
+ */

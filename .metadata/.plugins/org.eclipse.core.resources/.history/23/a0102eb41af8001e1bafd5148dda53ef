@@ -1,0 +1,83 @@
+package com.spring.microservice.rating.service.impl;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.spring.microservice.entity.Customer;
+import com.spring.microservice.rating.entity.RatingEntity;
+import com.spring.microservice.rating.repo.RatingRepo;
+import com.spring.microservice.rating.responce.HotelResponce;
+import com.spring.microservice.rating.responce.RatingResponce;
+import com.spring.microservice.rating.service.RatingService;
+import com.spring.microservice.rating.service.external.HotelEx;
+import com.spring.microservice.responce.CustomerResponce;
+
+@Service
+public class RatingImpl implements RatingService {
+
+	@Autowired
+	private RatingRepo ratingRepo;
+
+	@Autowired
+	private HotelEx hotelEx;
+
+	@Autowired
+	private ModelMapper mapper;
+
+	@Override
+	public RatingEntity createRating(RatingEntity ratingEntity) {
+		// TODO Auto-generated method stub
+		return ratingRepo.save(ratingEntity);
+	}
+
+	@Override
+	public RatingResponce getAllRatings() {
+		// TODO Auto-generated method stub
+		Iterable<RatingEntity> ratings = ratingRepo.findAll();
+		RatingResponce h1= mapper.map(ratings, RatingResponce.class);
+		List<HotelResponce> h2 = hotelEx.getHotelByHotelId(1);
+		h1.setHotels(h2);
+		return h1;
+		
+		//RatingResponce ratingResponce=mapper.map(ratings, RatingResponce.class);
+		//use feign client
+	//List<HotelResponce> hotelResponces=hotelEx.getHotelByHotelId(2);
+	//ratingResponce.setRatings(hotelResponces);
+//		List<RatingEntity> rat1= Arrays.stream(ratings).tol
+//		List<RatingEntity> ratingList=ratings.stream().map(rat->{
+//			HotelResponce hotelResponce=(HotelResponce) hotelEx.getHotelByHotelId(rat.getHotelId());
+//			
+//		}).collect(Collectors.toList());
+//		return ratings;
+//		
+//		
+//		Optional<Customer> customerid = customerRepo.findById(customerId);
+//		CustomerResponce customerResponce = mapper.map(customerid, CustomerResponce.class);
+//		
+//		// using feign client
+//		List<RatingResponce> ratingResponse = ratingServiceEx.getRatingByUserId(customerId);
+//		customerResponce.setRatings(ratingResponse);
+//		return customerResponce;
+	}
+
+	@Override
+	public List<RatingEntity> getRatingsByHotelId(int hotelId) {
+		// TODO Auto-generated method stub
+
+		return ratingRepo.findByHotelId(hotelId);
+	}
+
+	@Override
+	public List<RatingEntity> getRatingsByUserId(int userId) {
+		// TODO Auto-generated method stub
+
+		return ratingRepo.findByUserId(userId);
+	}
+
+}

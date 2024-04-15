@@ -1,0 +1,5 @@
+package com.spring.microservice.exception;
+
+public class ResourceNotFoundException {
+
+}

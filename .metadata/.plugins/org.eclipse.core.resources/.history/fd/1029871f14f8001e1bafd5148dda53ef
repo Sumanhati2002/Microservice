@@ -1,0 +1,60 @@
+package com.spring.microservice.rating.service.impl;
+
+import java.util.List;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.spring.microservice.rating.entity.RatingEntity;
+import com.spring.microservice.rating.repo.RatingRepo;
+import com.spring.microservice.rating.responce.HotelResponce;
+import com.spring.microservice.rating.responce.RatingResponce;
+import com.spring.microservice.rating.service.RatingService;
+import com.spring.microservice.rating.service.external.HotelEx;
+
+@Service
+public class RatingImpl implements RatingService {
+
+	@Autowired
+	private RatingRepo ratingRepo;
+
+	@Autowired
+	private HotelEx hotelEx;
+
+	@Autowired
+	private ModelMapper mapper;
+
+	@Override
+	public RatingEntity createRating(RatingEntity ratingEntity) {
+		// TODO Auto-generated method stub
+		return ratingRepo.save(ratingEntity);
+	}
+
+	@Override
+	public List<RatingEntity> getAllRatings() {
+		// TODO Auto-generated method stub
+		List<RatingEntity> ratings = (List<RatingEntity>) ratingRepo.findAll();
+		List<RatingEntity> ratingResponce=(List<RatingEntity>) mapper.map(ratings, RatingResponce.class);
+		//use feign client
+		
+		List<HotelResponce> hotelResponces=hotelEx.getHotelByHotelId(1);
+		((RatingResponce) ratingResponce).setRatings(hotelResponces);
+		return ratingResponce;
+	}
+
+	@Override
+	public List<RatingEntity> getRatingsByHotelId(int hotelId) {
+		// TODO Auto-generated method stub
+
+		return ratingRepo.findByHotelId(hotelId);
+	}
+
+	@Override
+	public List<RatingEntity> getRatingsByUserId(int userId) {
+		// TODO Auto-generated method stub
+
+		return ratingRepo.findByUserId(userId);
+	}
+
+}

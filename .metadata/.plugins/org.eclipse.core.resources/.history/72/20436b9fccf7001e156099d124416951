@@ -1,0 +1,5 @@
+package com.spring.microservice.rating.service.external;
+
+public interface HotelEx {
+
+}

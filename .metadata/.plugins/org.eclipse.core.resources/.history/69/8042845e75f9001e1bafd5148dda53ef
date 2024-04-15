@@ -1,0 +1,5 @@
+package com.spring.microservice.configuration;
+
+public class LoadBalancerConfiguration {
+
+}

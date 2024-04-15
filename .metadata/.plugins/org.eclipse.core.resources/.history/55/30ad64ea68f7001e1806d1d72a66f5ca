@@ -1,0 +1,5 @@
+package com.spring.microservice.hotel.responce;
+
+public class HotelResponce {
+
+}

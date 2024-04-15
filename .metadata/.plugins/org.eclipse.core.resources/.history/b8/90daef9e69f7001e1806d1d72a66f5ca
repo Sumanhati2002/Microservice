@@ -1,0 +1,5 @@
+package com.spring.microservice.service.external;
+
+public interface HotelService {
+
+}

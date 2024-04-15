@@ -1,0 +1,5 @@
+package com.spring.microservice.rating.config;
+
+public class MyConfig {
+
+}

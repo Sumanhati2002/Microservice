@@ -11,6 +11,5 @@ import com.spring.microservice.entity.Rating;
 public interface RatingServiceEx {
 
 	@GetMapping("rating/user/{userId}")
-	//@GetMapping("rating/user/{ratingId}")
     public Rating[] getRatingByUserId(@PathVariable int userId);
 }

@@ -28,14 +28,14 @@ public class HotelController {
 	        return new ResponseEntity<>(savedHotel, HttpStatus.CREATED);
 	    }
 
-	    // http://localhost:8080/api/users/1
+	    
 	    @GetMapping("{id}")
 	    public ResponseEntity<Hotel> getHotelById(@PathVariable("id") Integer hotelId){
 	    	Hotel hotel = hotelService.getHotelById(hotelId);
 	        return new ResponseEntity<>(hotel, HttpStatus.OK);
 	    }
 
-	    // http://localhost:8080/api/users
+	    
 	    @GetMapping
 	    public ResponseEntity<List<Hotel>> getAllHotels(){
 	        List<Hotel> hotels = hotelService.getAllHotels();

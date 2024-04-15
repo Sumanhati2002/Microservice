@@ -12,8 +12,4 @@ public interface HotelService {
 
     List<Hotel> getAllHotels();
 
-   // List<Hotel> getHotelByRatingId(int ratingId);
-//    Hotel updateHotel(Hotel hotel);
-//
-//    void deleteHotel(Integer hotelId);
 }

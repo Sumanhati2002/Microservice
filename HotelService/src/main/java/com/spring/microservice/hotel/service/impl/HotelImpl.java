@@ -35,21 +35,4 @@ public class HotelImpl implements HotelService{
 		return (List<Hotel>) hotelRepo.findAll();
 	}
 
-	
-
-	
-
-
-//	@Override
-//	public Hotel updateHotel(Hotel hotel) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public void deleteHotel(Integer hotelId) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-
 }

@@ -11,6 +11,19 @@ spring:
           http://localhost:8181/
         predicates:
         - Path=/customer/** 
+        
+      - id: RATING-SERVICE
+        uri:
+          http://localhost:8384/
+        predicates:
+        - Path=/rating/** 
+        
+      - id: HOTEL-SERVICE
+        uri:
+          http://localhost:8285/
+        predicates:
+        - Path=/hotel/**  
+                     
 eureka:
   instance:
     ip-address: true

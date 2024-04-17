@@ -1,0 +1,9 @@
+package com.spring.microservice.hotel.test;
+
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+@EnableWebMvc
+public class TestCase {
+
+
+}
